@@ -1,0 +1,109 @@
+<div class="container">
+  <h1>Teacher's Pet</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><h4>Name</h4></th>
+        <th><h4>Question Title</h4></th>
+        <th><h4>Description</h4></th>
+        <th><h4>Time Elapsed</h4></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each questions as |question question|}}
+      <tr class="question" data-id="{{question.id}}">
+        <td>{{question.owner_name}}</td>
+        <td>{{question.title}}</td>
+        <td>{{question.description}}</td>
+        <td>{{question.created_at}}</td>
+      </tr>
+      <tr>
+        <td class="question-drop-down" data-piggyid="{{question.id}}" colspan="4">
+          <div class="pback-form-panel">
+          <form action="/pback/{{question.id}}" method="POST">
+            <label for="pback-name">Name: </label>
+            <input id="pback-name" name="name" type="text">
+            <input class="btn-group" type="submit"/>
+          </form>
+          </div
+
+          <div class="pback-action-panel">
+            <div class="col-md-8">
+              <input class="pback-show-form btn-group" type="button" value="I have the same question!"/>
+            </div>
+            <form class="col-md-2" action="/questions/{{this.id}}">
+              <input class="btn-group" type="submit" value="Edit"/>
+            </form>
+            <form class="col-md-2" action="/questions/{{this.id}}?_method=DELETE" method="POST">
+              <input class="btn-group" type="submit" value="Delete"/>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {{#each ../pbackers as |pbacker pbacker|}}
+      {{#ifEquals question.id pbacker.question_id}}
+      <tr>
+          <td class="active-pback" colspan = "4" data-piggyid="{{question.id}}">
+            <div class= 'col-md-8'>
+            {{pbacker.owner_name}}
+            </div>
+            <div class= 'col-md-4'>
+            {{pbacker.created_at}}
+            </div>
+          </td>
+            <td class="active-pback-delete-panel" data-piggyid="{{question.id}}" colspan = "4">
+              <div class= 'col-md-6'>
+              {{pbacker.owner_name}}
+              </div>
+              <form class="col-md-3" action="/pback/{{pbacker.id}}?_method=DELETE" method="POST">
+                <input class="btn-group" type="submit" value="Delete"/>
+              </form>
+              <div class= 'col-md-3'>
+              {{pbacker.created_at}}
+              </div>
+            </td>
+        </tr>
+      {{/ifEquals}}
+      {{/each}}
+
+    {{/each}}
+    <tr>
+      <td colspan="4">
+        <h4 class="col-md-6">Your question doesn't exist?</h4>
+        <form action="/questions/new" class="col-md-6">
+          <input type="submit" value="Add a question to the que"/>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="col-md-12">
+    <h4 class="col-md-4">
+  </div>
+<script type="text/javascript">
+
+ function questionDropDown(event) {
+   $('.active-pback-delete-panel').hide()
+   $('.question-drop-down').hide()
+   $(`.question-drop-down[data-piggyid="${$(this).data().id}"]`).fadeIn()
+ }
+
+ function pbackShowForm(event) {
+   $('.pback-action-panel').fadeOut()
+   $('.pback-form-panel').fadeIn()
+ }
+
+ function pbackDeleteBtn(event){
+   $('.question-drop-down').hide()
+   $('.active-pback-delete-panel').hide()
+   $('.active-pback').fadeIn()
+   $(this).hide()
+   $($(this).siblings()[0]).fadeIn()
+ }
+
+  $('.active-pback').on('click',pbackDeleteBtn)
+  $('.question').on('click',questionDropDown)
+  $('.pback-show-form').on('click',pbackShowForm)
+
+</script>
