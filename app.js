@@ -5,12 +5,13 @@ const bodyParser = require('body-parser')
 const port = process.env.PORT || 8000
 const path = require('path')
 const methodOverride =  require('method-override')
-// const MomentHandler = require('handlebars.moment')
+const moment = require('moment');
 
 const index = require('./routes/index')
 const questions = require('./routes/questions')
 const pback = require('./routes/pback')
 
+console.log(moment().format());
 
 hbs.registerHelper('ifEquals', function(a, b, options) {
   if (a === b) {
@@ -19,7 +20,6 @@ hbs.registerHelper('ifEquals', function(a, b, options) {
   return options.inverse(this);
 });
 
-// MomentHandler.registerHelpers(hbs);
 
 
 app.set('views',path.join(__dirname,'views'))

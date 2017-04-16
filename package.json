@@ -15,10 +15,12 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
+    "handlebars-helper-moment": "^0.2.0",
     "handlebars.moment": "^1.0.4",
     "hbs": "^4.0.1",
     "knex": "^0.12.9",
     "method-override": "^2.3.8",
+    "moment": "^2.18.1",
     "pg": "^6.1.5"
   },
   "devDependencies": {

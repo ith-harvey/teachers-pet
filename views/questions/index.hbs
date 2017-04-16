@@ -1,5 +1,6 @@
 <div class="container">
   <h1>Teacher's Pet</h1>
+  {{currMoment}}
   <table class="table">
     <thead>
       <tr>
@@ -21,23 +22,26 @@
       <tr>
         <td class="question-drop-down" data-piggyid="{{question.id}}" colspan="4">
           <div class="pback-form-panel">
-          <form action="/pback/{{question.id}}" method="POST">
-            <label for="pback-name">Name: </label>
-            <input id="pback-name" name="name" type="text">
-            <input class="btn-group" type="submit"/>
-          </form>
-          </div
-
-          <div class="pback-action-panel">
-            <div class="col-md-8">
+            <form action="/pback/{{question.id}}" method="POST">
+              <label for="pback-name">Name: </label>
+              <input id="pback-name" name="name" type="text">
+              <input class="btn-group" type="submit"/>
+            </form>
+          </div>
+        <div colspan="4" class="pback-action-panel">
+            <div class="col-md-4">
               <input class="pback-show-form btn-group" type="button" value="I have the same question!"/>
             </div>
-            <form class="col-md-2" action="/questions/{{this.id}}">
-              <input class="btn-group" type="submit" value="Edit"/>
-            </form>
-            <form class="col-md-2" action="/questions/{{this.id}}?_method=DELETE" method="POST">
-              <input class="btn-group" type="submit" value="Delete"/>
-            </form>
+            <div class="col-md-4">
+              <form class="" action="/questions/{{this.id}}">
+                <input class="btn-group" type="submit" value="Edit"/>
+              </form>
+            </div>
+            <div class="col-md-4">
+              <form class="" action="/questions/{{this.id}}?_method=DELETE" method="POST">
+                <input class="btn-group" type="submit" value="Delete"/>
+              </form>
+            </div>
           </div>
         </td>
       </tr>
@@ -66,7 +70,6 @@
         </tr>
       {{/ifEquals}}
       {{/each}}
-
     {{/each}}
     <tr>
       <td colspan="4">
@@ -90,7 +93,7 @@
  }
 
  function pbackShowForm(event) {
-   $('.pback-action-panel').fadeOut()
+   $('.pback-action-panel').hide()
    $('.pback-form-panel').fadeIn()
  }
 

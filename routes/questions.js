@@ -1,13 +1,22 @@
 var express = require('express')
 var router = express.Router()
 var db = require('../db/connection')
+const moment = require('moment')
+
+function timeSince(arrayOfData) {
+  arrayOfData.forEach(dataObj => {
+    dataObj.created_at = moment(dataObj.created_at).fromNow()
+  })
+}
 
 
 router.get('/', (req,res,next) => {
   db('questions').select('*').then(questions => {
+    timeSince(questions)
     db('piggy_backers').select('*').then(pbackers => {
+      timeSince(pbackers)
       res.render('questions/index', {
-        questions, pbackers })
+        questions, pbackers})
     })
   })
 })
