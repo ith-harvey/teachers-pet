@@ -11,6 +11,8 @@ router.post('/:id', (req,res,next) => {
  }
   db('piggy_backers').insert(pbackDetails).then( () => {
         res.redirect('/questions')
+  }).catch((err) => {
+        next(err)
   })
 })
 
@@ -18,6 +20,8 @@ router.delete('/:id', (req,res,next) => {
   console.log(req.params.id);
   db('piggy_backers').where({id: req.params.id}).del().then( () => {
   res.redirect('/questions')
+  }).catch((err) => {
+        next(err)
   })
 })
 

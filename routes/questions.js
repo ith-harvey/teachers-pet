@@ -18,6 +18,7 @@ router.get('/', (req,res,next) => {
       res.render('questions/index', {
         questions, pbackers})
     })
+
   })
 })
 
@@ -35,6 +36,8 @@ router.post('/', (req,res,next) => {
   }
   db('questions').insert(question).then( () => {
     res.redirect('/questions')
+  }).catch((err) => {
+        next(err)
   })
 })
 
@@ -42,6 +45,8 @@ router.delete('/:id', (req,res,next) => {
   db('questions').where({id: req.params.id}).del().then( () => {
     db('piggy_backers').where({question_id: req.params.id}).del().then( () => {
     res.redirect('/questions')
+    }).catch((err) => {
+        next(err)
     })
   })
 })
@@ -55,6 +60,8 @@ router.put('/:id', (req,res,next) => {
   }
   db('questions').where({id: req.params.id}).update(question).then( () => {
     res.redirect('/questions')
+  }).catch((err) => {
+      next(err)
   })
 })
 
@@ -63,6 +70,8 @@ router.get('/:id', (req,res,next) => {
     res.render('questions/edit.hbs', {
     question
     })
+  }).catch((err) => {
+        next(err)
   })
 })
 

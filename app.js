@@ -21,6 +21,10 @@ hbs.registerHelper('ifEquals', function(a, b, options) {
 });
 
 
+function errorHandler(err,req,res,next) {
+  res.status(err.status)
+  res.render('error', { error: err })
+}
 
 app.set('views',path.join(__dirname,'views'))
 app.set('view engine', 'hbs')
@@ -34,6 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index)
 app.use('/questions', questions)
 app.use('/pback', pback)
+
+app.use(errorHandler)
+
+
 
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
