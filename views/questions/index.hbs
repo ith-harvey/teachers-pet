@@ -30,16 +30,16 @@
           </div>
         <div colspan="4" class="pback-action-panel">
             <div class="col-md-4">
-              <input class="pback-show-form btn-group" type="button" value="I have the same question!"/>
+              <input class="btn btn-primary pback-show-form btn-group" type="button" value="I have the same question!"/>
             </div>
             <div class="col-md-4">
               <form class="" action="/questions/{{this.id}}">
-                <input class="btn-group" type="submit" value="Edit"/>
+                <input class="btn btn-primary btn-group" type="submit" value="Edit"/>
               </form>
             </div>
             <div class="col-md-4">
               <form class="" action="/questions/{{this.id}}?_method=DELETE" method="POST">
-                <input class="btn-group" type="submit" value="Delete"/>
+                <input class="btn btn-danger btn-group" type="submit" value="Delete"/>
               </form>
             </div>
           </div>
@@ -61,7 +61,7 @@
               {{pbacker.owner_name}}
               </div>
               <form class="col-md-3" action="/pback/{{pbacker.id}}?_method=DELETE" method="POST">
-                <input class="btn-group" type="submit" value="Delete"/>
+                <input class="btn btn-danger btn-group" type="submit" value="Delete"/>
               </form>
               <div class= 'col-md-3'>
               {{pbacker.created_at}}
@@ -75,7 +75,7 @@
       <td colspan="4">
         <h4 class="col-md-6">Your question doesn't exist?</h4>
         <form action="/questions/new" class="col-md-6">
-          <input type="submit" value="Add a question to the que"/>
+          <input type="submit" class="btn btn-primary" value="Add a question to the que"/>
         </form>
       </td>
     </tr>
@@ -89,6 +89,8 @@
  function questionDropDown(event) {
    $('.active-pback-delete-panel').hide()
    $('.question-drop-down').hide()
+   $('.pback-form-panel').hide()
+      $('.pback-action-panel').fadeIn ()
    $(`.question-drop-down[data-piggyid="${$(this).data().id}"]`).fadeIn()
  }
 
