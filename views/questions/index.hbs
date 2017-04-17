@@ -49,10 +49,10 @@
       {{#ifEquals question.id pbacker.question_id}}
       <tr>
           <td class="active-pback" colspan = "4" data-piggyid="{{question.id}}">
-            <div class= 'col-md-8'>
+            <div class= 'col-md-5 col-md-offset-1'>
             {{pbacker.owner_name}}
             </div>
-            <div class= 'col-md-4'>
+            <div class= 'col-md-2 col-md-offset-4'>
             {{pbacker.created_at}}
             </div>
           </td>
@@ -90,7 +90,8 @@
    $('.active-pback-delete-panel').hide()
    $('.question-drop-down').hide()
    $('.pback-form-panel').hide()
-      $('.pback-action-panel').fadeIn ()
+   $('.active-pback').fadeIn()
+   $('.pback-action-panel').fadeIn()
    $(`.question-drop-down[data-piggyid="${$(this).data().id}"]`).fadeIn()
  }
 
