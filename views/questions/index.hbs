@@ -1,5 +1,6 @@
 <div class="container">
-  <table class="table">
+  <div class="panel panel-default">
+  <table class="table-borderless table">
     <thead>
       <tr>
         <th><h4>Name</h4></th>
@@ -9,13 +10,14 @@
       </tr>
     </thead>
     <tbody>
-
       {{#each questions as |question question|}}
       <tr class="question" data-id="{{question.id}}">
-        <td>{{question.owner_name}}</td>
-        <td>{{question.title}}</td>
-        <td>{{question.description}}</td>
-        <td>{{question.created_at}}</td>
+          <div class="panel-body">
+            <td class="question-name">{{question.owner_name}}</td>
+            <td class="question-title">{{question.title}}</td>
+            <td>{{question.description}}</td>
+            <td>{{question.created_at}}</td>
+        </div>
       </tr>
       <tr>
         <td class="question-drop-down" data-piggyid="{{question.id}}" colspan="4">
@@ -55,13 +57,13 @@
             </div>
           </td>
             <td class="active-pback-delete-panel" data-piggyid="{{question.id}}" colspan = "4">
-              <div class= 'col-md-6'>
+              <div class= 'col-md-3 col-md-offset-1'>
               {{pbacker.owner_name}}
               </div>
-              <form class="col-md-3" action="/pback/{{pbacker.id}}?_method=DELETE" method="POST">
+              <form class="col-md-2" action="/pback/{{pbacker.id}}?_method=DELETE" method="POST">
                 <input class="btn btn-danger btn-group" type="submit" value="Delete"/>
               </form>
-              <div class= 'col-md-3'>
+              <div class= 'col-md-2 col-md-offset-4'>
               {{pbacker.created_at}}
               </div>
             </td>
@@ -79,9 +81,8 @@
     </tr>
     </tbody>
   </table>
-  <div class="col-md-12">
-    <h4 class="col-md-4">
   </div>
+</div>
 <script type="text/javascript">
 
  function questionDropDown(event) {

@@ -12,3 +12,13 @@
 .active-pback-delete-panel {
   display:none;
 }
+
+
+.question-name, .question-title{
+  font-weight: bold;
+}
+
+
+.table-borderless td, .table-borderless th {
+    border: 0 !important;
+}
